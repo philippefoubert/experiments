@@ -1,4 +1,6 @@
-// http://perso.telecom-paristech.fr/~elc/igr201/
+//
+//  Taken (and adapted) from http://perso.telecom-paristech.fr/~elc/igr201/
+// 
 
 #include <QApplication>
 #include <QSurfaceFormat>

@@ -1,7 +1,5 @@
-// main.cpp
-
 //
-//  Take (and adapted) from http://www.bogotobogo.com/Qt/Qt5_OpenGL_QGLWidget.php
+//  Taken (and adapted) from http://www.bogotobogo.com/Qt/Qt5_OpenGL_QGLWidget.php
 //  Note: it is using QGLWidget which is marked as deprecated... and is replaced by QOpenGLWidget
 //
 #include <QApplication>
