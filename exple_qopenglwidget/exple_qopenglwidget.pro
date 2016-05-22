@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2015-10-18T15:38:30
+# OpenGL + QT : QOpenGLWidget
 #
 #-------------------------------------------------
 
@@ -12,10 +12,10 @@ TARGET   = exple_qopenglwidget
 TEMPLATE = app
 
 SOURCES += main.cpp\
-           mainwindow.cpp \
+           window.cpp \
            glwidget.cpp
 
-HEADERS += mainwindow.hpp \
+HEADERS += window.hpp \
            glwidget.hpp
 
-FORMS   += mainwindow.ui
+FORMS   += window.ui

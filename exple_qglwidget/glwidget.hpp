@@ -1,17 +1,15 @@
-// myglwidget.hpp
-
-#ifndef MYGLWIDGET_HPP_
-#define MYGLWIDGET_HPP_
+#ifndef GLWIDGET_HPP_
+#define GLWIDGET_HPP_
 
 #include <QGLWidget>
 
-class MyGLWidget : public QGLWidget
+class IGLWidget : public QGLWidget
 {
     Q_OBJECT
 
 public:
-    explicit MyGLWidget(QWidget *i_pParent = NULL);
-    ~MyGLWidget();
+    explicit IGLWidget(QWidget *i_pParent = NULL);
+    ~IGLWidget();
 
 protected:
     void initializeGL(void);
@@ -45,4 +43,4 @@ private:
     QPoint m_lastPos;
 };
 
-#endif // MYGLWIDGET_HPP_
+#endif // GLWIDGET_HPP_

@@ -1,5 +1,3 @@
-// window.hpp
-
 #ifndef WINDOW_HPP_
 #define WINDOW_HPP_
 
@@ -7,22 +5,22 @@
 
 namespace Ui
 {
-    class Window;
+    class IWindow;
 }
 
-class Window : public QWidget
+class IWindow : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit Window(QWidget *i_pParent = NULL);
-    ~Window();
+    explicit IWindow(QWidget *i_pParent = NULL);
+    ~IWindow();
 
 protected:
     void keyPressEvent(QKeyEvent *i_pEvent);
 
 private:
-    Ui::Window *m_pUi;
+    Ui::IWindow *m_pUi;
 };
 
 #endif // WINDOW_HPP_

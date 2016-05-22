@@ -1,10 +1,8 @@
-// myglwidget.cpp
-
 #include <QtOpenGL>
 
-#include "myglwidget.hpp"
+#include "glwidget.hpp"
 
-MyGLWidget::MyGLWidget(QWidget *i_pParent)
+IGLWidget::IGLWidget(QWidget *i_pParent)
     : QGLWidget(QGLFormat(QGL::SampleBuffers), i_pParent)
 {
     m_xRot = 0;
@@ -12,16 +10,16 @@ MyGLWidget::MyGLWidget(QWidget *i_pParent)
     m_zRot = 0;
 }
 
-MyGLWidget::~MyGLWidget()
+IGLWidget::~IGLWidget()
 {
 }
 
-QSize MyGLWidget::minimumSizeHint(void) const
+QSize IGLWidget::minimumSizeHint(void) const
 {
     return QSize(50, 50);
 }
 
-QSize MyGLWidget::sizeHint() const
+QSize IGLWidget::sizeHint() const
 {
     return QSize(400, 400);
 }
@@ -38,7 +36,7 @@ static void qNormalizeAngle(int &io_angle)
     }
 }
 
-void MyGLWidget::setXRotation(int i_angle)
+void IGLWidget::setXRotation(int i_angle)
 {
     qNormalizeAngle(i_angle);
     if(i_angle != m_xRot)
@@ -49,7 +47,7 @@ void MyGLWidget::setXRotation(int i_angle)
     }
 }
 
-void MyGLWidget::setYRotation(int i_angle)
+void IGLWidget::setYRotation(int i_angle)
 {
     qNormalizeAngle(i_angle);
     if(i_angle != m_yRot)
@@ -60,7 +58,7 @@ void MyGLWidget::setYRotation(int i_angle)
     }
 }
 
-void MyGLWidget::setZRotation(int i_angle)
+void IGLWidget::setZRotation(int i_angle)
 {
     qNormalizeAngle(i_angle);
     if(i_angle != m_zRot)
@@ -71,7 +69,7 @@ void MyGLWidget::setZRotation(int i_angle)
     }
 }
 
-void MyGLWidget::initializeGL(void)
+void IGLWidget::initializeGL(void)
 {
     qglClearColor(Qt::black);
 
@@ -85,7 +83,7 @@ void MyGLWidget::initializeGL(void)
     glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
 }
 
-void MyGLWidget::paintGL(void)
+void IGLWidget::paintGL(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
@@ -96,7 +94,7 @@ void MyGLWidget::paintGL(void)
     draw();
 }
 
-void MyGLWidget::resizeGL(int i_width, int i_height)
+void IGLWidget::resizeGL(int i_width, int i_height)
 {
     int side = qMin(i_width, i_height);
     glViewport((i_width - side) / 2, (i_height - side) / 2, side, side);
@@ -111,12 +109,12 @@ void MyGLWidget::resizeGL(int i_width, int i_height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-void MyGLWidget::mousePressEvent(QMouseEvent *i_pEvent)
+void IGLWidget::mousePressEvent(QMouseEvent *i_pEvent)
 {
     m_lastPos = i_pEvent->pos();
 }
 
-void MyGLWidget::mouseMoveEvent(QMouseEvent *i_pEvent)
+void IGLWidget::mouseMoveEvent(QMouseEvent *i_pEvent)
 {
     int dx = i_pEvent->x() - m_lastPos.x();
     int dy = i_pEvent->y() - m_lastPos.y();
@@ -135,42 +133,43 @@ void MyGLWidget::mouseMoveEvent(QMouseEvent *i_pEvent)
     m_lastPos = i_pEvent->pos();
 }
 
-void MyGLWidget::draw(void)
+void IGLWidget::draw(void)
 {
     qglColor(Qt::red);
+
     glBegin(GL_QUADS);
-        glNormal3f(0,0,-1);
-        glVertex3f(-1,-1,0);
-        glVertex3f(-1,1,0);
-        glVertex3f(1,1,0);
-        glVertex3f(1,-1,0);
+        glNormal3f( 0,  0, -1);
+        glVertex3f(-1, -1,  0);
+        glVertex3f(-1,  1,  0);
+        glVertex3f( 1,  1,  0);
+        glVertex3f( 1, -1,  0);
     glEnd();
 
     glBegin(GL_TRIANGLES);
-        glNormal3f(0,-1,0.707);
-        glVertex3f(-1,-1,0);
-        glVertex3f(1,-1,0);
-        glVertex3f(0,0,1.2);
+        glNormal3f( 0, -1, 0.707);
+        glVertex3f(-1, -1, 0);
+        glVertex3f( 1, -1, 0);
+        glVertex3f( 0,  0, 1.2);
     glEnd();
 
     glBegin(GL_TRIANGLES);
-        glNormal3f(1,0, 0.707);
-        glVertex3f(1,-1,0);
-        glVertex3f(1,1,0);
-        glVertex3f(0,0,1.2);
+        glNormal3f( 1,  0, 0.707);
+        glVertex3f( 1, -1, 0);
+        glVertex3f( 1,  1, 0);
+        glVertex3f( 0,  0, 1.2);
     glEnd();
 
     glBegin(GL_TRIANGLES);
-        glNormal3f(0,1,0.707);
-        glVertex3f(1,1,0);
-        glVertex3f(-1,1,0);
-        glVertex3f(0,0,1.2);
+        glNormal3f( 0,  1, 0.707);
+        glVertex3f( 1,  1, 0);
+        glVertex3f(-1,  1, 0);
+        glVertex3f( 0,  0, 1.2);
     glEnd();
 
     glBegin(GL_TRIANGLES);
-        glNormal3f(-1,0,0.707);
-        glVertex3f(-1,1,0);
-        glVertex3f(-1,-1,0);
-        glVertex3f(0,0,1.2);
+        glNormal3f(-1,  0, 0.707);
+        glVertex3f(-1,  1, 0);
+        glVertex3f(-1, -1, 0);
+        glVertex3f( 0,  0, 1.2);
     glEnd();
 }

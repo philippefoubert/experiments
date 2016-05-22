@@ -1,15 +1,13 @@
-// window.cpp
-
 #include <QKeyEvent>
 
 #include "window.hpp"
 #include "ui_window.h"
 
-#include "myglwidget.hpp"
+#include "glwidget.hpp"
 
-Window::Window(QWidget *i_pParent) :
+IWindow::IWindow(QWidget *i_pParent) :
     QWidget(i_pParent),
-    m_pUi(new Ui::Window)
+    m_pUi(new Ui::IWindow)
 {
     m_pUi->setupUi(this);
 
@@ -18,12 +16,12 @@ Window::Window(QWidget *i_pParent) :
     connect(m_pUi->myGLWidget, SIGNAL(zRotationChanged(int)), m_pUi->rotZSlider, SLOT(setValue(int)));
 }
 
-Window::~Window()
+IWindow::~IWindow()
 {
     delete m_pUi;
 }
 
-void Window::keyPressEvent(QKeyEvent *i_pEvent)
+void IWindow::keyPressEvent(QKeyEvent *i_pEvent)
 {
     if(Qt::Key_Escape == i_pEvent->key())
     {

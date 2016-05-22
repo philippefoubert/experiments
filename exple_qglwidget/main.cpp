@@ -10,21 +10,21 @@
 int main(int i_argc, char *i_argv[])
 {
     QApplication app(i_argc, i_argv);
-    Window window;
-    window.resize(window.sizeHint());
+    IWindow mainWin;
+    mainWin.resize(mainWin.sizeHint());
     int desktopArea = QApplication::desktop()->width() *
                       QApplication::desktop()->height();
-    int widgetArea  = window.width() * window.height();
+    int widgetArea  = mainWin.width() * mainWin.height();
 
-    window.setWindowTitle("OpenGL - Example with QGLWidget (deprecated)");
+    mainWin.setWindowTitle("OpenGL + QT - Example with QGLWidget (deprecated)");
 
     if(((float)widgetArea / (float)desktopArea) < 0.75f)
     {
-        window.show();
+        mainWin.show();
     }
     else
     {
-        window.showMaximized();
+        mainWin.showMaximized();
     }
 
     return app.exec();
