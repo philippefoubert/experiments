@@ -18,11 +18,11 @@
 
 #include <stdio.h>
 
-#include "opencv2/core.hpp"
-#include "opencv2/core/opengl.hpp"
-#include "opencv2/core/ocl.hpp"
-#include "opencv2/imgproc.hpp"
-#include "opencv2/videoio.hpp"
+#include <opencv2/core.hpp>
+#include <opencv2/core/opengl.hpp>
+#include <opencv2/core/ocl.hpp>
+#include <opencv2/imgproc.hpp>
+#include <opencv2/videoio.hpp>
 
 #include "winapp.hpp"
 
@@ -122,7 +122,7 @@ public:
                 m_mode = MODE_GPU;
                 break;
             case XK_9:
-                toggle_buffer();
+                m_isBuffer = !m_isBuffer;
                 break;
             case XK_Escape:
                 m_end_loop = true;
@@ -403,8 +403,6 @@ protected:
         return keysym;
     }
 #endif
-
-    void toggle_buffer(void)     { m_isBuffer = !m_isBuffer; }
 
 private:
     bool               m_isBuffer; //<! if OpenGL, shall we use buffers?
