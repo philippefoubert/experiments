@@ -1,3 +1,4 @@
+#include <QDebug>
 #include <QMouseEvent>
 
 #include "glwidget.hpp"
@@ -71,7 +72,12 @@ void IGLWidget::setZRotation(int i_angle)
 
 void IGLWidget::initializeGL(void)
 {
-    initializeOpenGLFunctions();   // Do not forget!
+    initializeOpenGLFunctions(); // Do not forget!
+
+    qDebug() << "OpenGL version :" << reinterpret_cast<const char*>(glGetString(GL_VERSION));
+    qDebug() << "OpenGL vendor  :" << reinterpret_cast<const char*>(glGetString(GL_VENDOR));
+    qDebug() << "OpenGL renderer:" << reinterpret_cast<const char*>(glGetString(GL_RENDERER));
+
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
     glEnable(GL_DEPTH_TEST);
@@ -80,7 +86,7 @@ void IGLWidget::initializeGL(void)
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
 
-    static GLfloat lightPosition[4] = { 0, 0, 10, 1.0 };
+    const GLfloat lightPosition[4] = { 0, 0, 10, 1.0 };
     glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
 }
 
