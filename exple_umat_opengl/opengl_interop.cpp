@@ -443,7 +443,7 @@ int main(int i_argc, char** i_argv)
     cap.open(video_file);
     if(!cap.isOpened())
     {
-        printf("Can not open camera or video file \'%s\'\n", video_file);
+        printf("Can not open video file \'%s\'\n", video_file);
         return -1;
     }
 
