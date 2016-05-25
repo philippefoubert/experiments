@@ -41,8 +41,6 @@ signals:
     void zRotationChanged(int i_angle);
 
 private:
-    void draw(void);
-
     int  getFrame    (cv::UMat &o_frame);
     int  init        (void);
     void printDetails(void);

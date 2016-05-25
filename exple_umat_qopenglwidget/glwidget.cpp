@@ -126,7 +126,7 @@ void IGLWidget::initializeGL(void)
 
     if(cv::ocl::haveOpenCL())
     {
-        (void)cv::ogl::ocl::initializeContextFromGL();
+        (void)cv::ogl::ocl::initializeContextFromGL(); //FIXME ici
     }
 
     printDetails();
@@ -143,7 +143,16 @@ void IGLWidget::paintGL(void)
     glRotatef(m_yRot / 16.0f, 0.0f, 1.0f, 0.0f);
     glRotatef(m_zRot / 16.0f, 0.0f, 0.0f, 1.0f);
 
-    draw();
+    m_texture.bind();
+
+    // Map the texture to a surface
+    glBegin(GL_QUADS);
+        // Texture coordinates -> Surface coodinates
+        glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f,  1.0f, 0.1f);
+        glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, -1.0f, 0.1f);
+        glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f, -1.0f, 0.1f);
+        glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f,  1.0f, 0.1f);
+    glEnd();
 }
 
 void IGLWidget::resizeGL(int i_width, int i_height)
@@ -185,21 +194,6 @@ void IGLWidget::mouseMoveEvent(QMouseEvent *i_pEvent)
     m_lastPos = i_pEvent->pos();
 }
 
-void IGLWidget::draw(void)
-{
-    m_texture.bind();
-
-    // Map the texture to a surface
-    glBegin(GL_QUADS);
-        // Texture coordinates -> Surface coodinates
-        // glTexCoord2f(s, t)  -> glVertex3f(    x,    y,     z);
-        glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f,  1.0f, 0.1f);
-        glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, -1.0f, 0.1f);
-        glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f, -1.0f, 0.1f);
-        glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f,  1.0f, 0.1f);
-    glEnd();
-}
-
 int IGLWidget::getFrame(cv::UMat &o_frame)
 {
     int res(0);
@@ -236,15 +230,21 @@ int IGLWidget::onTimer(void)
         {
             cv::ogl::Buffer buffer;
             buffer.create(frame.rows, frame.cols, CV_8UC4,
-                          cv::ogl::Buffer::PIXEL_UNPACK_BUFFER, true);
+                          // The buffer will be used for writing to OpenGL textures:
+                          cv::ogl::Buffer::PIXEL_UNPACK_BUFFER,
+                          // Auto release:
+                          true);
 
             cv::UMat result = cv::ogl::mapGLBuffer(buffer, cv::ACCESS_WRITE);
             cv::blur(frame, result, cv::Size(15, 15), cv::Point(-7, -7));
             cv::ogl::unmapGLBuffer(result);
 
             // buffer -> texture
-            m_texture.copyFrom(buffer, true);
+            m_texture.copyFrom(buffer,
+                               // Auto release:
+                               true);
 
+            // Schedule a paint event
             update();
         }
     }
