@@ -1,1 +1,1 @@
-OpenGL + QT - Demonstration app based on the QOpenGLWidget class
+QT + OpenGL interoperability - Demonstration app based on the QOpenGLWidget class
