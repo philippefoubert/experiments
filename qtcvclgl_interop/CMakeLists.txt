@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.0)
 
 # Sets the PROJECT_NAME variable
-project(exple_umat_qopenglwidget CXX)
+project(qtcvclgl_interop CXX)
 
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -17,6 +17,8 @@ find_package(Qt5Widgets REQUIRED)
 # Find the OpenCV library
 find_package(OpenCV 3.0.0 REQUIRED core imgproc videoio)
 include_directories(${OpenCV_INCLUDE_DIRS})
+
+include_directories("D:/FOUBERT/projets/opensource_workspace/opencv/3rdparty/include/opencl/1.2")
 
 file(GLOB_RECURSE ui_files *.ui)
 qt5_wrap_ui(ui_headers ${ui_files})

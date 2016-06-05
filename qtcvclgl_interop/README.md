@@ -1,2 +1,1 @@
-# exple_qopenglwidget
-OpenGL + QT - Demonstration app based on the QOpenGLWidget class
+QT + OpenCV + OpenCL + OpenGL  interoperability - Demonstration app

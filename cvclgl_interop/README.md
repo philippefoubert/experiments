@@ -1,2 +1,1 @@
-# cvclgl_interop
-OpenCV / OpenCL / OpenGL interoperability
+OpenCV + OpenCL + OpenGL interoperability - Demonstration app
