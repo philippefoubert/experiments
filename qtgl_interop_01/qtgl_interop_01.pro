@@ -8,7 +8,7 @@ QT      += core gui opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET   = exple_qglwidget
+TARGET   = qtgl_interop_01
 TEMPLATE = app
 
 

@@ -8,7 +8,7 @@ QT      += core gui opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET   = exple_qopenglwidget
+TARGET   = qtgl_interop_02
 TEMPLATE = app
 
 SOURCES += main.cpp\
